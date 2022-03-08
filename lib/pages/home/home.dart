@@ -24,10 +24,12 @@ class _HomePageState extends State<HomePage> {
                 selected: tabIndex,
                 callback: (int index) {
                   setState(() {
+                    print(index);
                     tabIndex = index;
                   });
-                  pageController.jumpToPage(index);
-                })
+                  // pageController.jumpToPage(index);
+                }),
+                Expanded(child: )
           ],
         ),
       ),
