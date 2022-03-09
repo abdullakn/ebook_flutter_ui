@@ -1,5 +1,6 @@
 import 'package:ebook/constants/colors.dart';
 import 'package:ebook/model/book.dart';
+import 'package:ebook/pages/details/widgets/book_details.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
@@ -9,13 +10,14 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [],
-        ),
-      )
-    );
+        appBar: _buildAppBar(context),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              BookDetails(book: book)
+            ],
+          ),
+        ));
   }
 
   AppBar _buildAppBar(BuildContext context) {
@@ -30,7 +32,11 @@ class DetailPage extends StatelessWidget {
         color: kFont,
       ),
       actions: [
-        IconButton(onPressed: (){}, icon:Icon(Icons.more_horiz_outlined),color: kFont,)
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.more_horiz_outlined),
+          color: kFont,
+        )
       ],
     );
   }
