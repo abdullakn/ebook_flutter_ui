@@ -1,5 +1,6 @@
 import 'package:ebook/constants/colors.dart';
 import 'package:ebook/model/book.dart';
+import 'package:ebook/pages/details/widgets/book_cover.dart';
 import 'package:ebook/pages/details/widgets/book_details.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,8 @@ class DetailPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              BookDetails(book: book)
+              BookDetails(book: book),
+              BookCover(book: book)
             ],
           ),
         ));
