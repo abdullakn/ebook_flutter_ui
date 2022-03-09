@@ -1,4 +1,5 @@
 import 'package:ebook/constants/colors.dart';
+import 'package:ebook/pages/home/widgets/book_staggered_grid_view.dart';
 import 'package:ebook/pages/home/widgets/custom_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -17,23 +18,48 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _buildAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomBar(
+      body: Column(
+        children: [
+          CustomBar(
+              selected: tabIndex,
+              callback: (int index) {
+                setState(() {
+                  print(index);
+                  tabIndex = index;
+                });
+                pageController.jumpToPage(index);
+              }),
+          Expanded(
+            child: BookStaggeredGridView(
                 selected: tabIndex,
                 callback: (int index) {
                   setState(() {
-                    print(index);
                     tabIndex = index;
                   });
-                  // pageController.jumpToPage(index);
-                }),
-                Expanded(child: )
-          ],
-        ),
+                },
+                pageController: pageController),
+          )
+        ],
       ),
+      bottomNavigationBar: _buildBottomNavBar(),
     );
+  }
+
+ Widget  _buildBottomNavBar(){
+
+   final bottoms=[
+     Icons.home_outlined,
+     Icons.analytics_outlined,
+     Icons.keyboard_voice_outlined,
+     Icons.bookmark_border_outlined,
+     Icons.person_outline
+
+   ];
+   return SizedBox(
+     width: MediaQuery.of(context).size.width,
+     height: 56,
+   );
+
   }
 
   AppBar _buildAppBar() {
