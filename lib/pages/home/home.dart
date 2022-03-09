@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var tabIndex = 0;
+  var bottomIndex = 0;
   final pageController = PageController();
   @override
   Widget build(BuildContext context) {
@@ -45,21 +46,43 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
- Widget  _buildBottomNavBar(){
-
-   final bottoms=[
-     Icons.home_outlined,
-     Icons.analytics_outlined,
-     Icons.keyboard_voice_outlined,
-     Icons.bookmark_border_outlined,
-     Icons.person_outline
-
-   ];
-   return SizedBox(
-     width: MediaQuery.of(context).size.width,
-     height: 56,
-   );
-
+  Widget _buildBottomNavBar() {
+    final bottoms = [
+      Icons.home_outlined,
+      Icons.analytics_outlined,
+      Icons.keyboard_voice_outlined,
+      Icons.bookmark_border_outlined,
+      Icons.person_outline
+    ];
+    final width = MediaQuery.of(context).size.width;
+    return SizedBox(
+      width: width,
+      height: 56,
+      child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (_, index) => GestureDetector(
+                onTap: () {
+                  setState(() {
+                    bottomIndex = index;
+                  });
+                },
+                child: Container(
+                  width: (width - 40) / 5,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: bottomIndex == index
+                      ? BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Colors.deepOrange, width: 3)))
+                      : null,
+                      child: Icon(bottoms[index],size: 30,color: index==bottomIndex?kFont:Colors.grey[400],),
+                ),
+              ),
+          separatorBuilder: (_, index) => SizedBox(
+                width: 10,
+              ),
+          itemCount: bottoms.length),
+    );
   }
 
   AppBar _buildAppBar() {
